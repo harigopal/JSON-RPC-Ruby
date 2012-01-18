@@ -7,7 +7,7 @@ class JsonRpcRuby::RackApplication
 
   def call(environment)
     request = Rack::Request.new(environment)
-    params = JSON.load(request.POST)
+    params = JSON.load(request.body.read)
 
     ["method", "params"].each do |required_parameter|
       unless params.include? required_parameter

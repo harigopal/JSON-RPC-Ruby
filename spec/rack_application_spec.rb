@@ -9,10 +9,11 @@ describe JsonRpcRuby::RackApplication do
 
   subject { JsonRpcRuby::RackApplication.new(mock_service) }
 
-  let(:mock_request) { double "Rack Request", :POST => {"method" => "a_method", "params" => [1, 2, 3]}.to_json }
+  let(:mock_request) { double "Rack Request" }
 
   before :each do
     Rack::Request.stub(:new).and_return(mock_request)
+    mock_request.stub_chain(:body, :read).and_return({"method" => "a_method", "params" => [1, 2, 3]}.to_json)
   end
 
   it { should respond_to(:call).with(1).argument }
@@ -22,7 +23,7 @@ describe JsonRpcRuby::RackApplication do
       mock_service.should_receive(:a_method).with(1, 2, 3)
       subject.call({})
       other_arguments = [3, 4, 5]
-      mock_request.stub(:POST).and_return({"method" => "another_method", "params" => other_arguments}.to_json)
+      mock_request.stub_chain(:body, :read).and_return({"method" => "another_method", "params" => other_arguments}.to_json)
       mock_service.should_receive(:another_method).with(3, 4, 5)
       subject.call({})
     end
@@ -30,7 +31,7 @@ describe JsonRpcRuby::RackApplication do
     context "when passed all mandatory parameters" do
       context "when method execution occurs normally" do
         it "returns an array with three elements" do
-          mock_request.stub(:POST).and_return({"method" => "add", "params" => [1, 2], "id" => 1}.to_json)
+          mock_request.stub_chain(:body, :read).and_return({"method" => "add", "params" => [1, 2], "id" => 1}.to_json)
           mock_service.stub(:add).and_return(3)
           subject.call({}).should == [200, {"Content-Type" => "application/json"}, [{"result" => 3, "error" => nil, "id" => 1}.to_json]]
         end
@@ -39,7 +40,7 @@ describe JsonRpcRuby::RackApplication do
       context "when method execution fails" do
         it "closes connection and returns an error message" do
           mock_service.stub(:add).and_raise(TypeError)
-          mock_request.stub(:POST).and_return({"method" => "add", "params" => [1, "2"], "id" => 1}.to_json)
+          mock_request.stub_chain(:body, :read).and_return({"method" => "add", "params" => [1, "2"], "id" => 1}.to_json)
           status, headers, body = subject.call({})
           status.should == 500
           headers.should == {"Content-Type" => "application/json"}
@@ -53,7 +54,7 @@ describe JsonRpcRuby::RackApplication do
 
     context "when passed invalid parameters" do
       it "closes connection and returns an error message" do
-        mock_request.stub(:POST).and_return({}.to_json)
+        mock_request.stub_chain(:body, :read).and_return({}.to_json)
         subject.call({}).should == [400, {"Content-Type" => "application/json"}, [{"result" => nil, "error" => "Invalid Request Parameters", "id" => nil}.to_json]]
       end
     end
