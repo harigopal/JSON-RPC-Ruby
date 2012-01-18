@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.summary     = %q{A client and server implementation for JSON-RPC in Ruby}
   s.description = %q{A rack-compatible client server implementation for JSON-RPC in Ruby}
 
-  s.add_development_dependency "rspec"
+  s.add_development_dependency "rspec", "= 2.7.0"
   s.add_development_dependency "rake"
   s.add_development_dependency "yard"
 

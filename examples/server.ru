@@ -1,4 +1,3 @@
-BASEPATH = File.dirname(File.expand_path(__FILE__))
-require "#{BASEPATH}/../lib/json_rpc_ruby"
+require 'json_rpc_ruby'
 
-run JsonRpcRuby::RackApplication.new
+run JsonRpcRuby::RackApplication.new(ExampleService.new)
