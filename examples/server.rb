@@ -10,4 +10,4 @@ class ExampleServer < JsonRpcRuby::Server
   end
 end
 
-JsonRpcRuby::Server.serve(:port => 80)
+ExampleServer.serve(:port => 80)

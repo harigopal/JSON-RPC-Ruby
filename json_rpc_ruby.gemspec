@@ -16,6 +16,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rake"
   s.add_development_dependency "yard"
 
+  s.add_dependency "rack"
   s.add_dependency "thin"
 
   s.files              = `git ls-files`.split("\n") - ["Gemfile.lock", ".rvmrc"]

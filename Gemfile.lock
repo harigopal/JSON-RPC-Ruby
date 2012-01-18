@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     JSON RPC Ruby (0.0.1)
+      rack
       thin
 
 GEM
