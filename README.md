@@ -20,13 +20,13 @@ An experiment, in creating a client and server implementation for JSON-RPC in Ru
 
 ### Rack-up
 
-    require 'json_rpc_ruby'
+    require 'json_rpc'
 
     run JsonRpcRuby::RackApplication.new(ExampleService.new)
 
 ## Client (Not functional)
 
-    require 'json_rpc_ruby'
+    require 'json_rpc'
 
     API = JsonRpcRuby::Client.new('http://localhost', :port => 80)
 
