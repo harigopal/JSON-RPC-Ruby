@@ -28,7 +28,7 @@ An experiment, in creating a client and server implementation for JSON-RPC in Ru
 
     require 'json_rpc_ruby'
 
-    API = JsonRpcRuby::Client.connect('http://localhost', :port => 80)
+    API = JsonRpcRuby::Client.new('http://localhost', :port => 80)
 
     p API.add(1,2)
 
