@@ -1,12 +1,13 @@
 require_relative 'spec_helper'
 
 describe JsonRpc::RackApplication do
-  # TODO: The following test doesn't work as it should. Replace this with an reversed error expectation.
-  it "should accept a Service class object upon initialization" do
-    JsonRpc::RackApplication.should respond_to(:new).with(1).argument
-  end
-
   let(:mock_service) { double("Service").as_null_object }
+
+  it "should accept a Service class object upon initialization" do
+    expect {
+      JsonRpc::RackApplication.new(mock_service)
+    }.to_not raise_error
+  end
 
   subject { JsonRpc::RackApplication.new(mock_service) }
 
