@@ -1,11 +1,11 @@
 lib = File.expand_path('../lib/', __FILE__)
 $:.unshift lib unless $:.include?(lib)
 
-require 'json_rpc_ruby'
+require 'json_rpc'
 
 Gem::Specification.new do |s|
-  s.name        = "JSON RPC Ruby"
-  s.version     = JsonRpcRuby::VERSION
+  s.name        = "JSON RPC"
+  s.version     = JsonRpc::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Hari Gopal"]
   s.email       = ["harigopal1@gmail.com"]

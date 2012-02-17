@@ -1,2 +1,2 @@
-require_relative '../lib/json_rpc_ruby'
+require_relative '../lib/json_rpc'
 

@@ -1,6 +1,6 @@
 require_relative 'version'
 
-class JsonRpcRuby::RackApplication
+class JsonRpc::RackApplication
   def initialize(service_object)
     @service_object = service_object
   end
