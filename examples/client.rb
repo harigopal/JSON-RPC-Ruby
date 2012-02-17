@@ -1,6 +1,6 @@
-require 'json_rpc_ruby'
+require 'json_rpc'
 
-API = JsonRpcRuby::Client.connect('http://localhost', :port => 80)
+API = JsonRpc::Client.connect('http://localhost', :port => 80)
 
 p API.add(1,2)
 

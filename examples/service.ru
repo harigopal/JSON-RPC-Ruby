@@ -1,3 +1,3 @@
-require 'json_rpc_ruby'
+require 'json_rpc'
 
-run JsonRpcRuby::RackApplication.new(ExampleService.new)
+run JsonRpc::RackApplication.new(ExampleService.new)

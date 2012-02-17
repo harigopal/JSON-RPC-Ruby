@@ -7,4 +7,4 @@ class Calculator
   end
 end
 
-run JsonRpcRuby::RackApplication.new(Calculator.new)
+run JsonRpc::RackApplication.new(Calculator.new)
